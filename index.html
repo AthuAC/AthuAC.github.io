@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atharva Chaskar — Data Analyst & Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0f;
+    --bg2: #141416;
+    --bg3: #1a1a1e;
+    --card: #18181c;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0ede8;
+    --muted: #8a8680;
+    --accent: #c8f55a;
+    --accent2: #a8e03a;
+    --accent-dim: rgba(200,245,90,0.12);
+    --accent-dim2: rgba(200,245,90,0.06);
+    --teal: #4ecdc4;
+    --teal-dim: rgba(78,205,196,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(14,14,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,245,90,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,245,90,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 80%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,245,90,0.06) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(200,245,90,0.2);
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .line2 {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.125rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-desc strong {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: #0e0e0f;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border2);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.04);
+    transform: translateY(-1px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.03em;
+  }
+
+  .stat-num span { color: var(--accent); }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem 2.25rem;
+    transition: border-color 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .project-card.featured::before { opacity: 0.6; }
+
+  .project-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(200,245,90,0.15);
+  }
+
+  .project-tag.teal {
+    background: var(--teal-dim);
+    color: var(--teal);
+    border-color: rgba(78,205,196,0.15);
+  }
+
+  .project-tag.amber {
+    background: rgba(250,199,117,0.1);
+    color: #fac775;
+    border-color: rgba(250,199,117,0.15);
+  }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.925rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .project-bullets {
+    list-style: none;
+    margin-bottom: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .project-bullets li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .project-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-pill {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.25rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', monospace;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.825rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid rgba(200,245,90,0.2);
+    padding: 0.4rem 0.9rem;
+    border-radius: 0.35rem;
+    background: var(--accent-dim2);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .project-link:hover {
+    background: var(--accent-dim);
+    border-color: rgba(200,245,90,0.35);
+  }
+
+  .project-link.ghost {
+    color: var(--muted);
+    border-color: var(--border);
+    background: transparent;
+  }
+
+  .project-link.ghost:hover {
+    color: var(--text);
+    border-color: var(--border2);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* AWARD BANNER */
+  .award-banner {
+    background: linear-gradient(135deg, rgba(200,245,90,0.08), rgba(78,205,196,0.06));
+    border: 1px solid rgba(200,245,90,0.15);
+    border-radius: 1rem;
+    padding: 2rem 2.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .award-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .award-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .award-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.02em;
+  }
+
+  .award-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .award-desc a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  .award-desc a:hover { text-decoration: underline; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .skill-group:hover { border-color: var(--border2); }
+
+  .skill-group-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-chip {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.25rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 300;
+  }
+
+  /* EXPERIENCE */
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem 2.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .exp-card:hover { border-color: var(--border2); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 400;
+    margin-top: 0.2rem;
+  }
+
+  .exp-period {
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    font-weight: 300;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.2s;
+  }
+
+  .edu-card:hover { border-color: var(--border2); }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .edu-school {
+    font-size: 0.825rem;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    font-weight: 300;
+  }
+
+  .edu-meta {
+    font-size: 0.775rem;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    text-align: center;
+  }
+
+  .contact-section .section-title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 460px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .project-card.featured {
+      grid-template-columns: 1fr;
+    }
+    .edu-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    footer { padding: 1.5rem; }
+  }
+
+  @media (min-width: 769px) {
+    .projects-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">AC<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:100%; padding-left:min(3rem,8vw); padding-right:min(3rem,8vw);">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Available for hire</div>
+    <h1>
+      Atharva<br>
+      <span class="line2">Chaskar</span>
+    </h1>
+    <p class="hero-desc">
+      Data Analyst & Engineer with hands-on experience building <strong>production ETL pipelines</strong>, deploying <strong>live dashboards</strong>, and conducting <strong>award-winning research</strong> in spatial analytics.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="mailto:atharvachaskar01@gmail.com" class="btn-secondary">Get in Touch</a>
+      <a href="https://github.com/AthuAC" target="_blank" rel="noopener" class="btn-secondary">GitHub ↗</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">11.1<span>B</span></span>
+        <span class="stat-label">Rides analyzed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3,322</span>
+        <span class="stat-label">Census blocks clustered</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3.91</span>
+        <span class="stat-label">GPA / 4.00</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1<span>×</span></span>
+        <span class="stat-label">Best paper award</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Work</p>
+  <h2 class="section-title">Projects</h2>
+
+  <!-- Award Banner -->
+  <div class="award-banner reveal">
+    <div class="award-icon">🏆</div>
+    <div>
+      <p class="award-label">Publication & Award</p>
+      <p class="award-title">Best Research-in-Progress Paper — MWAIS 2026</p>
+      <p class="award-desc">
+        Co-authored peer-reviewed paper accepted to MWAIS 2026 Proceedings, competing among faculty, doctoral, and graduate submissions. Presented in Athens, Ohio, May 2026.<br>
+        <a href="https://aisel.aisnet.org/mwais2026/" target="_blank" rel="noopener">Chaskar, A. & Singh, N. (2026). Mobility Misalignment in the Age of Hybrid Work. MWAIS 2026 Proceedings. ↗</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- CTA — Featured -->
+    <div class="project-card featured reveal">
+      <div>
+        <span class="project-tag">Data Engineering</span>
+        <h3 class="project-title">CTA Performance Analytics Platform</h3>
+        <p class="project-desc">End-to-end pipeline ingesting 25 years of Chicago Transit Authority ridership data from a public REST API, loaded into SQLite, and surfaced through an interactive live dashboard.</p>
+        <ul class="project-bullets">
+          <li>Ingested 9,190 records (Jan 2001–Feb 2026) from Chicago Data Portal REST API via Python ETL</li>
+          <li>Uncovered 57% COVID-driven ridership drop, peak year (2012), and busiest single day (2.05M rides)</li>
+          <li>Built interactive Plotly Dash dashboard with 4 visualizations — deployed and live</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">Pandas</span>
+          <span class="tech-pill">SQLite</span>
+          <span class="tech-pill">SQLAlchemy</span>
+          <span class="tech-pill">Plotly Dash</span>
+          <span class="tech-pill">REST API</span>
+          <span class="tech-pill">Render</span>
+        </div>
+        <div class="project-links">
+          <a href="https://cta-analytics.onrender.com" target="_blank" rel="noopener" class="project-link">Live Dashboard ↗</a>
+          <a href="https://github.com/AthuAC/cta-analytics" target="_blank" rel="noopener" class="project-link ghost">GitHub ↗</a>
+        </div>
+      </div>
+      <div>
+        <span class="project-tag teal">Spatial Analytics</span>
+        <h3 class="project-title">Transit–Walkability Gap Research</h3>
+        <p class="project-desc">Applied unsupervised machine learning to 3,322 census block groups to identify mobility misalignment patterns across the Chicago metro area.</p>
+        <ul class="project-bullets">
+          <li>K-means clustering (scikit-learn) identifying a Transit–Walkability Gap affecting 53% of the Chicago–Naperville–Elgin CBSA</li>
+          <li>Rejected fourth variable (D5AR) based on multicollinearity analysis (r = 0.79) and cluster instability</li>
+          <li>End-to-end pipeline: data cleaning → feature selection → z-score standardization → clustering → ANOVA validation</li>
+          <li>Publication-quality spatial maps via GeoPandas and Matplotlib</li>
+        </ul>
+        <div class="project-tech">
+          <span class="tech-pill">Python</span>
+          <span class="tech-pill">scikit-learn</span>
+          <span class="tech-pill">GeoPandas</span>
+          <span class="tech-pill">Matplotlib</span>
+          <span class="tech-pill">K-means</span>
+          <span class="tech-pill">ANOVA</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AthuAC" target="_blank" rel="noopener" class="project-link ghost">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chicago Crime -->
+    <div class="project-card reveal">
+      <span class="project-tag amber">Data Mining</span>
+      <h3 class="project-title">Chicago Crime Data Engineering & Mining Pipeline</h3>
+      <p class="project-desc">Large-scale preprocessing and analysis of 750K+ Chicago crime records with Tableau dashboards and machine learning models for pattern detection.</p>
+      <ul class="project-bullets">
+        <li>Preprocessed 750K+ records — missing values, type conversions, structural inconsistencies</li>
+        <li>3 Tableau dashboards: executive overview, time/arrest insights, geographic hotspot analysis across 262K+ incidents</li>
+        <li>Hierarchical clustering in SAS Enterprise Miner with 90% sub-sample stability; Decision Tree at 88% accuracy</li>
+      </ul>
+      <div class="project-tech">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Pandas</span>
+        <span class="tech-pill">Tableau</span>
+        <span class="tech-pill">SAS Enterprise Miner</span>
+        <span class="tech-pill">Hierarchical Clustering</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/AthuAC" target="_blank" rel="noopener" class="project-link ghost">GitHub ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Toolkit</p>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <p class="skill-group-title">Analytics & BI</p>
+      <div class="skill-list">
+        <span class="skill-chip">SQL</span>
+        <span class="skill-chip">Tableau</span>
+        <span class="skill-chip">Power BI</span>
+        <span class="skill-chip">EDA</span>
+        <span class="skill-chip">K-means Clustering</span>
+        <span class="skill-chip">Statistical Modeling</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <p class="skill-group-title">Programming</p>
+      <div class="skill-list">
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">Pandas</span>
+        <span class="skill-chip">NumPy</span>
+        <span class="skill-chip">scikit-learn</span>
+        <span class="skill-chip">GeoPandas</span>
+        <span class="skill-chip">R</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <p class="skill-group-title">Data Engineering</p>
+      <div class="skill-list">
+        <span class="skill-chip">Azure Data Factory</span>
+        <span class="skill-chip">ETL / ELT</span>
+        <span class="skill-chip">SQLAlchemy</span>
+        <span class="skill-chip">REST APIs</span>
+        <span class="skill-chip">SQLite</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <p class="skill-group-title">Workflow & Dev</p>
+      <div class="skill-list">
+        <span class="skill-chip">Git</span>
+        <span class="skill-chip">CI/CD</span>
+        <span class="skill-chip">Agile / Scrum</span>
+        <span class="skill-chip">Plotly Dash</span>
+        <span class="skill-chip">Excel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Background</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div>
+        <p class="exp-role">Associate Application Developer</p>
+        <p class="exp-company">Accenture · Data & Analytics · Pune, India</p>
+      </div>
+      <span class="exp-period">Apr 2023 – Jul 2024</span>
+    </div>
+    <ul class="project-bullets">
+      <li>Reduced support incidents by 30% and maintained 99%+ data reliability by designing and enforcing data quality checks across Azure Data Factory ELT pipelines processing data from 5+ heterogeneous sources</li>
+      <li>Authored SQL transformations producing curated, analytics-ready datasets powering enterprise reporting dashboards</li>
+      <li>Partnered with analysts and product owners to translate business requirements into validated data outputs in Agile-Scrum sprints</li>
+      <li>Managed code promotion across environments using CI/CD and Git-based workflows</li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <p class="section-label">Education</p>
+    <div class="edu-grid" style="margin-top: 1rem;">
+      <div class="edu-card reveal">
+        <p class="edu-degree">M.S. Management Information Systems</p>
+        <p class="edu-school">University of Illinois Springfield</p>
+        <p class="edu-meta">GPA 3.91 / 4.00 · May 2026 · Beta Gamma Sigma</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="edu-degree">B.E. Mechanical Engineering</p>
+        <p class="edu-school">JSPM's Rajarshi Shahu College of Engineering, Pune</p>
+        <p class="edu-meta">May 2022</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <p class="section-label">Say hello</p>
+  <h2 class="section-title reveal">Open to opportunities</h2>
+  <p class="contact-desc reveal">Looking for data analyst and data engineering roles. Based in Springfield, IL — open to remote and hybrid.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:atharvachaskar01@gmail.com" class="btn-primary">Email Me ↗</a>
+    <a href="https://www.linkedin.com/in/atharvachaskar" target="_blank" rel="noopener" class="btn-secondary">LinkedIn ↗</a>
+    <a href="https://github.com/AthuAC" target="_blank" rel="noopener" class="btn-secondary">GitHub ↗</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Atharva Chaskar · <a href="https://atharvachaskar.com">atharvachaskar.com</a></p>
+  <p>Springfield, IL · <a href="mailto:atharvachaskar01@gmail.com">atharvachaskar01@gmail.com</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
